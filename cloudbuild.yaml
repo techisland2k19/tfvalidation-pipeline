@@ -1,4 +1,7 @@
 steps:
+- id: 'tf plan'
+  name: 'hashicorp/terraform:0.12.14'
+  
 - id: 'tf validator'
   name: 'thazelart/terraform-validator'
   entrypoint: 'sh'
@@ -7,7 +10,8 @@ steps:
   - |
       if [ -d "cloudresources/" ]; then
     
-        /terraform-validator-linux-amd64 validate cloudresources/tfplan900.tfplan.json --policy-path=/policy-library
+        chmod 755 /terraform-validator-linux-amd64;
+        terraform-validator-linux-amd64 validate cloudresources/tfplan900.tfplan.json --policy-path=/policy-library
       else
         echo "***************************** SKIPPING *******************************"
         echo " Error in excecution......"
