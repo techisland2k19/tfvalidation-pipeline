@@ -6,7 +6,7 @@ steps:
   - '-c'
   - |
       if [ -d "cloudresources/" ]; then
-        cd cloudresources/
+        cd cloudresources/;ls -ltr
         terraform-validator validate cloudresources/tfplan900.tfplan.json --policy-path=/policy-library
       else
         echo "***************************** SKIPPING *******************************"
