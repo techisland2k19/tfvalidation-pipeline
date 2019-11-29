@@ -1,6 +1,6 @@
 steps:
 - id: 'tf validator'
-  name: 'alpine'
+  name: 'thazelart/terraform-validator'
   entrypoint: 'sh'
   args: 
   - '-c'
