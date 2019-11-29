@@ -5,6 +5,10 @@ steps:
   args: 
   - '-c'
   - |
-      if [ -d "infraascodeResources4validationchecks/" ]; then
-        cd infraascodeResources4validationchecks/
-        terraform-validator-linux-amd64 validate infraascodeResources4validationchecks/tfplan900.tfplan.json --policy-path=/policy-library
+      if [ -d "cloudresources/" ]; then
+        cd cloudresources/
+        terraform-validator-linux-amd64 validate cloudresources/tfplan900.tfplan.json --policy-path=/policy-library
+      else
+        echo "***************************** SKIPPING *******************************"
+        echo " Error in excecution......"
+        echo "*******************************************************************************"
