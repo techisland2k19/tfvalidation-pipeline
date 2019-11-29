@@ -1,6 +1,6 @@
 steps:
 - id: 'tf validator'
-  name: 'no image available'
+  name: 'alpine'
   entrypoint: 'sh'
   args: 
   - '-c'
