@@ -4,7 +4,7 @@
 #}
 
 variable "name" {
-    description = "The name of the VPC being created."
+    description = "The name of the VPC beig created."
     type        = "string"
    default ="hellovpc"
 }
