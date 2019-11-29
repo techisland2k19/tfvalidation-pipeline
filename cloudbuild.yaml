@@ -6,9 +6,9 @@ steps:
   - '-c'
   - |
       if [ -d "cloudresources/" ]; then
-        cd /;ls -ltr
-        chmod 755 /terraform-validator-linux-amd64;
-        terraform-validator-linux-amd64 validate cloudresources/tfplan900.tfplan.json --policy-path=/policy-library
+        cd tfvalidation-pipeline;ls -ltr
+        chmod 755 tfvalidation-pipeline/terraform-validator-linux-amd64;
+        tfvalidation-pipeline/terraform-validator-linux-amd64 validate cloudresources/tfplan900.tfplan.json --policy-path=/policy-library
       else
         echo "***************************** SKIPPING *******************************"
         echo " Error in excecution......"
