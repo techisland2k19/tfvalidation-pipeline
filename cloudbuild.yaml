@@ -1,0 +1,10 @@
+steps:
+- id: 'tf validator'
+  name: 'thazelart/terraform-validator'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+      if [ -d "infraascodeResources4validationchecks/" ]; then
+        cd infraascodeResources4validationchecks/
+        terraform-validator-linux-amd64 validate infraascodeResources4validationchecks/tfplan900.tfplan.json --policy-path=/policy-library
