@@ -6,7 +6,6 @@ steps:
   - '-c'
   - |
       if [ -d "cloudresources/" ]; then
-       cd tfvalidation-pipeline; ls -ltr; 
         docker run -d -i -t masterjey/tf-validator validate cloudresources/tfplan900.tfplan.json --policy-path=/policy-library
       else
         echo "***************************** SKIPPING *******************************"
