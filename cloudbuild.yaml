@@ -1,15 +1,13 @@
 steps:
 - id: 'tf validator'
-  name: 'thazelart/terraform-validator'
+  name: 'masterjey/tf-validator'
   entrypoint: 'sh'
   args: 
   - '-c'
   - |
       if [ -d "cloudresources/" ]; then
        cd tfvalidation-pipeline; ls -ltr; 
-       cp tfvalidation-pipeline/terraform-validator-linux-amd64 /workspace/
-
-       terraform-validator-linux-amd64 validate cloudresources/tfplan900.tfplan.json --policy-path=/policy-library
+        docker run -d -i -t masterjey/tf-validator validate cloudresources/tfplan900.tfplan.json --policy-path=/policy-library
       else
         echo "***************************** SKIPPING *******************************"
         echo " Error in excecution......"
