@@ -6,4 +6,4 @@ steps:
 
 - name: 'debian'
   entrypoint: 'bash'
-  args: ['terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library']
+  args: ['./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library']
