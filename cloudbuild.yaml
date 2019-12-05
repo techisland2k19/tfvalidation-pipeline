@@ -3,7 +3,7 @@ steps:
   name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp', 'gs://terraform-validator/releases/2019-11-07/terraform-validator-linux-amd64', '.']
 
-- name: 'masterjey/tf-validator'
+- name: 'ubuntu'
   entrypoint: 'sh'
   args: 
   - '-c'
