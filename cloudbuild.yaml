@@ -8,7 +8,7 @@ steps:
   args: 
   - '-c'
   - |
-      if [ -d "policy-library/" ]; then
+      if [ -d "tfvalidation-pipeline/" ]; then
          cd cloudresources/;ls -ltr
          pwd
          sleep 20
