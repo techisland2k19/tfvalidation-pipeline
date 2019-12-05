@@ -1,8 +1,5 @@
 steps:
-- id: 'tf validator'
+- id: 'validator binary'
   name: 'gcr.io/cloud-builders/gsutil'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - |
-  'cp gs://terraform-validator/releases/2019-11-07/terraform-validator-linux-amd64 .'
+  args: ['cp', 'gs://terraform-validator/releases/2019-11-07/terraform-validator-linux-amd64', '.']
+  
