@@ -1,22 +1,6 @@
 steps:
-#- name: 'gcr.io/cloud-builders/gsutil'
- # args: ['cp', 'gs://terraform-validator/releases/2019-11-07/terraform-validator-linux-amd64', '.']
-  
 - id: 'tf validator'
   name: 'masterjey/tf-validator'
-  entrypoint: 'sh'
-  args: 
-  - '-c'
-  - |
-      if [ -d "consolidated/" ]; then
-         #cd consolidated/;ls -ltr
-       
-         #sleep 20
-        # cd consolidated/policy-library/;ls -ltr
-        export _POLICY_PATH=/workspace/consolidated/policy-library
-      docker run -d -i -t masterjey/tf-validator validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library
-      else
-        echo "***************************** SKIPPING *******************************"
-        echo " Error in excecution......"
-        echo "*******************************************************************************"
-      fi
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ["run", "-t", "masterjey/tf-validator validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library"]
