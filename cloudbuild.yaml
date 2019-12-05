@@ -9,9 +9,10 @@ steps:
   - '-c'
   - |
       if [ -d "policy-library/" ]; then
-         cd cloudresources/;ls -ltr
-         cd policy-library/; ls -ltr
-         export POLICY_PATH=/policy-library
+         #cd cloudresources/;ls -ltr
+         cd policy-library/;ls -ltr
+         pwd
+         export POLICY_PATH=policy-library
       docker run -d -i -t masterjey/tf-validator validate cloudresources/tfplan900.tfplan.json --policy-path=/policy-library
       else
         echo "***************************** SKIPPING *******************************"
