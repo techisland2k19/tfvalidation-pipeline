@@ -15,7 +15,7 @@ steps:
          cd consolidated/policy-library/;ls -ltr
          pwd
          export POLICY_PATH=/workspace/consolidated/policy-library
-      docker run -d -i -t masterjey/tf-validator validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=$POLICY_PATH
+      docker run -d -i -t masterjey/tf-validator validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=${POLICY_PATH}
       else
         echo "***************************** SKIPPING *******************************"
         echo " Error in excecution......"
