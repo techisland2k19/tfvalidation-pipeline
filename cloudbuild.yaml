@@ -12,7 +12,7 @@ steps:
         pwd
         ls -ltr
         
-      chmod 755 /workspace/terraform-validator-linux-amd64; ./workspace/terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library  
+      sudo chmod 755 terraform-validator-linux-amd64; ./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library  
       else
         echo "***************************** SKIPPING *******************************"
         echo " Error in excecution......"
