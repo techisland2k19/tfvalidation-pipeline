@@ -1,4 +1,4 @@
 steps:
 - id: 'tf validator'
   name: 'masterjey/tf-validator'
-  args: ["masterjey/tf-validator validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library"]
+  args: ["terraform-validator validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library"]
