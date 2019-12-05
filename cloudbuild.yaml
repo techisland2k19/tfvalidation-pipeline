@@ -1,4 +1,7 @@
 steps:
+- name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp', 'gs://terraform-validator/releases/2019-11-07/terraform-validator-linux-amd64', '.']
+  
 - id: 'tf validator'
   name: 'masterjey/tf-validator'
   entrypoint: 'sh'
@@ -6,7 +9,8 @@ steps:
   - '-c'
   - |
       if [ -d "cloudresources/" ]; then
-        docker run -d -i -t masterjey/tf-validator validate cloudresources/tfplan900.tfplan.json --policy-path=/policy-library
+ 
+        run -d -i -t masterjey/tf-validator validate cloudresources/tfplan900.tfplan.json --policy-path=/policy-library
       else
         echo "***************************** SKIPPING *******************************"
         echo " Error in excecution......"
