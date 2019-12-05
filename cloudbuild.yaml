@@ -3,13 +3,13 @@ steps:
   name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp', 'gs://terraform-validator/releases/2019-11-07/terraform-validator-linux-amd64', '.']
 
-- name: 'debian'
+- name: 'masterjey/tf-validator'
   entrypoint: 'sh'
   args: 
   - '-c'
   - |
       if [ -d "consolidated/" ]; then
-     "terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library"
+      terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library
       else
         echo "***************************** SKIPPING *******************************"
         echo " Error in excecution......"
