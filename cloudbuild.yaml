@@ -5,5 +5,5 @@ steps:
   args: 
   - '-c'
   - |
-  cp gs://terraform-validator/releases/2019-11-07/terraform-validator-linux-amd64 .
-  cd .;ls -ltr
+  'cp gs://terraform-validator/releases/2019-11-07/terraform-validator-linux-amd64 .'
+  'cd .;ls -ltr'
