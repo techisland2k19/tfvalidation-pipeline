@@ -9,12 +9,12 @@ steps:
   - '-c'
   - |
       if [ -d "consolidated/" ]; then
-         cd consolidated/;ls -ltr
+         #cd consolidated/;ls -ltr
        
          #sleep 20
         # cd consolidated/policy-library/;ls -ltr
         export _POLICY_PATH=/workspace/consolidated/policy-library
-      "docker run -d -i -t masterjey/tf-validator validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=${_POLICY_PATH}"
+      run -d -i -t masterjey/tf-validator validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library
       else
         echo "***************************** SKIPPING *******************************"
         echo " Error in excecution......"
