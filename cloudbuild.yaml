@@ -8,7 +8,7 @@ steps:
   args: 
   - '-c'
   - |
-      if [ -d "cloudresources/" && "policy-library/" ]; then
+      if [ -d "cloudresources/" && -d "policy-library/" ]; then
          cd cloudresources/;ls -ltr
          cd policy-library/; ls -ltr
          export POLICY_PATH=/policy-library
