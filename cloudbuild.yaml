@@ -14,7 +14,7 @@ steps:
         
        chmod 755 terraform-validator-linux-amd64; ./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library  
       else
-        echo "***************************** SKIPPING *******************************"
+        echo "******************************* SKIPPING *******************************"
         echo " Error in excecution......"
         echo "*******************************************************************************"
       fi
