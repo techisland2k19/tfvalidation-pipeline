@@ -2,4 +2,8 @@ steps:
 - id: 'validator binary'
   name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp', 'gs://terraform-validator/releases/2019-11-07/terraform-validator-linux-amd64', '.']
-  
+
+
+- name: 'debian'
+  entrypoint: 'bash'
+  args: ['terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library']
