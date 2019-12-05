@@ -9,7 +9,7 @@ steps:
   - '-c'
   - |
       if [ -d "consolidated/" ]; then
-     terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library
+     "terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library"
       else
         echo "***************************** SKIPPING *******************************"
         echo " Error in excecution......"
