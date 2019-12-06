@@ -7,7 +7,7 @@ steps:
   - |
       if [ -d "consolidated/" ]; then
    
-       chmod 755 terraform-validator-linux-amd64; ./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library/ --project=p-02-08-19-gcp-lab-admin4  
+       chmod 755 terraform-validator-linux-amd64; ./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID  
       else
         echo "******************************* SKIPPING *******************************"
         echo " Error in excecution......"
