@@ -1,6 +1,6 @@
 steps:
 - id: 'validator binary'
-  name: 'gcr.io/cloud-builders/docker'
+  name: 'gcr.io/cloud-builders/docker:18.09.6'
   entrypoint: 'sh'
   args: 
   - '-c'
