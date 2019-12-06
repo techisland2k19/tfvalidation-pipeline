@@ -6,10 +6,7 @@ steps:
   - '-c'
   - |
       if [ -d "consolidated/" ]; then
-  - 'validate'
-  - 'consolidated/cloudresources/tfplan900.tfplan.json'
-  - '--policy-path=consolidated/policy-library'
-  - '--project=$PROJECT_ID'
+      validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library --project=$PROJECT_ID
         else
         echo "***************************** SKIPPING *******************************"
         echo " Error in excecution......"
