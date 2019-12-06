@@ -16,7 +16,7 @@ steps:
       
 - id: "Read Values"
   name: gcr.io/cloud-builders/git
-  entrypoint: /bin/bash
+  entrypoint: 'sh'
   args:
     - -c
     - |
