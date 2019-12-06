@@ -1,6 +1,6 @@
 steps:
 - id: 'validator binary'
-  name: 'centos:latest'
+  name: 'alpine:latest'
   entrypoint: 'sh'
   args: 
   - '-c'
