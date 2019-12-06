@@ -5,4 +5,4 @@ steps:
   - 'validate'
   - 'consolidated/cloudresources/tfplan900.tfplan.json'
   - '--policy-path=consolidated/policy-library'
-  - '--project=p-02-08-19-gcp-lab-admin4'
+  - '--project=$PROJECT_ID'
