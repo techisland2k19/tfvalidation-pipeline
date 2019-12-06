@@ -9,8 +9,8 @@ steps:
   - '-c'
   - |
       if [ -d "consolidated/" ]; then
-        pwd
-        ls -ltr
+      sudo cp /etc/ssl/certs/ca-certificates.crt  /usr/local/share/ca-certificates/ca-certificates.crt
+      sudo update-ca-certificates
         
        chmod 755 terraform-validator-linux-amd64; ./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library/ --ancestry organization/913144897837/projects/p-02-08-19-gcp-lab-admin4  
       else
