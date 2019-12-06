@@ -5,16 +5,5 @@ steps:
   args: 
   - '-c'
   - |
-      if [ -d "consolidated/" ]; then
-   
        chmod 755 terraform-validator-linux-amd64; ./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID >> /workspace/result.txt  
        cat /workspace/result.txt 
-      else
-        echo "******************************* SKIPPING *******************************"
-        echo " Error in excecution......"
-        echo "*******************************************************************************"
-      fi
-      
-- id: Save validator result to GCS 
-  name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp','-r','/workspace/result.txt','gs://tfcode_vali/$BUILD_ID/result.txt']
