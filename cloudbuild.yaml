@@ -1,6 +1,6 @@
 steps:
 - id: 'validator binary'
-  name: 'docker:18.09.6'
+  name: 'centos:latest'
   entrypoint: 'sh'
   args: 
   - '-c'
