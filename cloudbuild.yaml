@@ -7,9 +7,18 @@ steps:
   - |
       if [ -d "consolidated/" ]; then
    
-       chmod 755 terraform-validator-linux-amd64; ./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID >> result.txt  
+       chmod 755 terraform-validator-linux-amd64; ./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID >> /workspace/result.txt  
       else
         echo "******************************* SKIPPING *******************************"
         echo " Error in excecution......"
         echo "*******************************************************************************"
       fi
+      
+- id: "Read Values"
+  name: gcr.io/cloud-builders/git
+  entrypoint: /bin/bash
+  args:
+    - -c
+    - |
+      # Read from "/workspace"
+      echo "Found violations we saved " $(cat /workspace/result.txt) 
