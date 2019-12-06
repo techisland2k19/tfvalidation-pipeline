@@ -1,6 +1,6 @@
 steps:
 - id: 'validator binary'
-  name: 'alpine:latest'
+  name: 'gcr.io/cloud-builders/docker'
   entrypoint: 'sh'
   args: 
   - '-c'
