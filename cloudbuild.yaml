@@ -3,4 +3,4 @@ steps:
   name: 'masterjey/tf-validator'
   #entrypoint: 'sh'
   args:
-  - 'masterjey/tf-validator validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library'
+  - 'masterjey/tf-validator terraform-validator validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library'
