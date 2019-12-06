@@ -1,6 +1,7 @@
 steps:  
 - id: 'tf validator'
   name: 'masterjey/tf-validator'
+  entrypoint: 'sh'
   args: 
   - '-c'
   - |
