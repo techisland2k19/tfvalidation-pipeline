@@ -15,11 +15,6 @@ steps:
         echo "*******************************************************************************"
       fi
       
-- id: "Read Values"
-  name: gcr.io/cloud-builders/git
-  entrypoint: 'sh'
-  args:
-    - -c
-    - |
-      # Read from "/workspace"
-      echo "Found violations we saved " $(cat /workspace/result.txt) 
+- id: Save validator result to GCS 
+  name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp','-r','/workspace/result.txt','gs://gs://tfcode_vali/$BUILD_ID/result.txt']
