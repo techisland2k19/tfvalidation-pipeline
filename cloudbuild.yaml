@@ -6,6 +6,11 @@ steps:
   - '-c'
   - |
       if [ -d "consolidated/" ]; then
+      yum install -y device-mapper-persistent-data lvm2
+      yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+      yum update
+      yum install docker-ce
+      systemctl enable docker && systemctl start docker && systemctl status docker
       docker run -d -i -t masterjey/tf-validator validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library
       else
         echo "***************************** SKIPPING *******************************"
