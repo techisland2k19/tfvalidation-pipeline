@@ -2,4 +2,4 @@ steps:
 - id: 'tf validator'
   name: 'masterjey/tf-validator'
   #entrypoint: 'sh'
-  args: ['terraform-validator --help']
+  args: ['run','terraform-validator --help']
