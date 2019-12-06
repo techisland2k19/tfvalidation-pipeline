@@ -1,9 +1,9 @@
 steps:
-- id: 'validator binary'
-  name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp', 'gs://terraform-validator/releases/2019-11-07/terraform-validator-linux-amd64', '.']
+#- id: 'validator binary'
+  #name: 'gcr.io/cloud-builders/gsutil'
+  #args: ['cp', 'gs://terraform-validator/releases/2019-11-07/terraform-validator-linux-amd64', '.']
 
-- name: 'debian'
+- name: 'ubuntu:latest'
   entrypoint: 'sh'
   args: 
   - '-c'
