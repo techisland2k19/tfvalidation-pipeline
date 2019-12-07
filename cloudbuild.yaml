@@ -18,3 +18,19 @@ steps:
 - id: Save validator result to GCS 
   name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp','-r','/workspace/result.txt','gs://tfcode_vali/$BUILD_ID/result.txt']
+
+- id: 'Apply on GCP'
+  name: 'centos:latest'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+    fcount=0
+    if [ -e "result.txt" ]; then
+      fcount=`grep "Constraint" result.txt | awk '{print $1}'|sort| uniq -c|awk '{print $1}'`
+         echo "$fcount" 
+      elif if [ $fcount != 0 ];then
+         echo "Don't execute [terraform apply] resources"
+      else 
+        echo "apply on resources "
+    fi
