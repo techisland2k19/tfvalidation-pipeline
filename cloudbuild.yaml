@@ -8,7 +8,7 @@ steps:
   
       chmod 755 terraform-validator-linux-amd64;
       stat="$$(./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID )"   
-      echo " $${stat}"
+   
       if [ "$$stat" == "2" ]]; then
            echo "exception found"
            #exit 1
