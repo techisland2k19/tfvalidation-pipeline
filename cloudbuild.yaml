@@ -6,8 +6,10 @@ steps:
   - '-c'
   - |
   
-      chmod 755 terraform-validator-linux-amd64;
-      stat="$(./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID )"   
-   
+      chmod 755 terraform-validator-linux-amd64;./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID   
+           if [ exit code -eq 2 ]; then
+           echo "exception found"
+           #exit 1
+          fi
 
        #chmod 755 terraform-validator-linux-amd64; ./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID >> /workspace/result.txt  
