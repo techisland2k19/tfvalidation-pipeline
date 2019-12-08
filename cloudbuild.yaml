@@ -19,7 +19,8 @@ steps:
   args: ['cp','-r','/workspace/result.txt','gs://tfcode_vali/$BUILD_ID/result.txt']
 
 - id: 'Apply on GCP'
-  name: 'centos:latest'
+  name: 'gcr.io/cloud-builders/docker:18.09.6'
+  #name: 'centos:latest'
   entrypoint: 'sh'
   args: 
   - '-c'
