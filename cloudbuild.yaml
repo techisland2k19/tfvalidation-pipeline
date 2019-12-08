@@ -24,13 +24,12 @@ steps:
   args: 
   - '-c'
   - |
-
-      if [ -e "result.txt" ]; then
+      if [ -e "/workspace/result.txt" ]; then
           fcount=0
           fcount=`grep "Constraint" result.txt | awk '{print $1}'|sort| uniq -c|awk '{print $1}'`
             echo "$fcount" 
       elif if [ $fcount != 0 ];then
           echo "Don't execute [terraform apply] resources"
       else 
-          echo "apply on resources "
+          echo "apply on resources"
     fi
