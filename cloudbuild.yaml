@@ -1,5 +1,5 @@
 steps:
-- id: 'validator binary'
+- id: 'validate tfplan output'
   name: 'gcr.io/cloud-builders/docker:18.09.6'
   entrypoint: 'sh'
   args: 
@@ -37,4 +37,4 @@ steps:
           fi
       #else
         #echo "Result file didn't generate/exist";
-    fi
+    #fi
