@@ -35,6 +35,6 @@ steps:
           else 
               echo "apply on resources";
           fi
-      else
-        echo "Result file didn't generate/exist";
+      #else
+        #echo "Result file didn't generate/exist";
     fi
