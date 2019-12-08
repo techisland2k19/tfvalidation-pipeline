@@ -8,7 +8,7 @@ steps:
       if [ -d "consolidated/" ]; then
    
        chmod 755 terraform-validator-linux-amd64;
-       ./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID >> /workspace/result.txt 
+       ./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID
        cat /workspace/result.txt
       else
         echo " Relevant resources didn't exist......"
@@ -35,6 +35,7 @@ steps:
               echo "Violation Found...Don't execute code for cloud resources";
             else 
                 echo "No Violation found...Apply on resources";
+                #terraform apply -auto-approve
             fi
         else
         echo "Result file didn't generate/exist";
