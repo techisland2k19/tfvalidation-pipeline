@@ -37,7 +37,5 @@ steps:
             fi
         else
         echo "Result file didn't generate/exist";
-        fi
-      #else
-        #echo "Result file didn't generate/exist";
-    #fi
+      fi
+
