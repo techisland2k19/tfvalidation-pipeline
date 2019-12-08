@@ -26,7 +26,7 @@ steps:
   args: 
   - '-c'
   - |
-      if [ -d "workspace/result.txt" ]; then
+      if [ -d "workspace/" ]; then
           fcount=0;
           fcount=`grep "Constraint" /workspace/result.txt | awk '{print $1}'|sort| uniq -c|awk '{print $1}'`;
             echo "$fcount";
