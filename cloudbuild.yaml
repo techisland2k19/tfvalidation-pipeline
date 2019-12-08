@@ -28,12 +28,12 @@ steps:
       if [ -e "/workspace/result.txt" ]; then
           fcount=0;
           fcount=`grep "Constraint" /workspace/result.txt | awk '{print $1}'|sort| uniq -c|awk '{print $1}'`;
-            echo "$fcount" 
+            echo "$fcount";
          if [ $fcount != 0 ];then
-             echo "Don't execute [terraform apply] resources"
+             echo "Don't execute [terraform apply] resources";
           else 
-              echo "apply on resources"
+              echo "apply on resources";
        fi
       else
-        echo "Result file didn't generate/exist" 
+        echo "Result file didn't generate/exist";
     fi
