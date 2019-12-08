@@ -31,10 +31,11 @@ steps:
           fcount=`grep "Constraint" /workspace/result.txt | awk '{print $1}'|sort| uniq -c|awk '{print $1}'`;
             echo "$fcount";
           if [ $fcount != 0 ];then
-             echo "Don't execute code for cloud resources";
+             echo "Violation Found...Don't execute code for cloud resources";
           else 
-              echo "apply on resources";
+              echo "No Violation found...Apply on resources";
           fi
+        echo "Result file didn't generate/exist";
         fi
       #else
         #echo "Result file didn't generate/exist";
