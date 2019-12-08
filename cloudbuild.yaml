@@ -19,3 +19,22 @@ steps:
   args: ['cp','-r','/workspace/result.txt','gs://tfcode_vali/$BUILD_ID/result.txt']
 
 
+- id: 'Apply on GCP'
+  name: 'gcr.io/cloud-builders/docker:18.09.6'
+  #name: 'centos:latest'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+      #if [ -e "/workspace/result.txt" ]; then
+          fcount=0;
+          fcount=`grep "Constraint" /workspace/result.txt | awk '{print $1}'|sort| uniq -c|awk '{print $1}'`;
+            echo "$fcount";
+         if [ $fcount != 0 ];then
+             echo "Don't execute [terraform apply] resources";
+          else 
+              echo "apply on resources";
+       fi
+      #else
+        #echo "Result file didn't generate/exist";
+    #fi
