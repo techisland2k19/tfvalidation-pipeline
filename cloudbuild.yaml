@@ -20,7 +20,8 @@ steps:
 
 
 - id: 'Execute for GCP Resources'
-  name: 'gcr.io/cloud-builders/docker:18.09.6'
+  name: 'hashicorp/terraform:0.12.0'
+  #name: 'gcr.io/cloud-builders/docker:18.09.6'
   #name: 'centos:latest'
   entrypoint: 'sh'
   args: 
