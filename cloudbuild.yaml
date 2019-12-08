@@ -19,7 +19,7 @@ steps:
   args: ['cp','-r','/workspace/result.txt','gs://tfcode_vali/$BUILD_ID/result.txt']
 
 
-- id: 'Spin Resources'
+- id: 'Execute for GCP Resources'
   name: 'gcr.io/cloud-builders/docker:18.09.6'
   #name: 'centos:latest'
   entrypoint: 'sh'
@@ -35,6 +35,7 @@ steps:
           else 
               echo "apply on resources";
           fi
+        fi
       #else
         #echo "Result file didn't generate/exist";
     #fi
