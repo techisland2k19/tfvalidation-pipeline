@@ -14,9 +14,9 @@ steps:
         cat /workspace/result.txt
         
             if [ $status != 0 ];then
-              echo "Violation Found...Don't execute code for cloud resources";
+              echo "Security Violation Found...Don't execute code for cloud resources";
              else 
-                echo "No Violation found...Apply on resources";
+                echo "No security Violation found...Apply on resources";
                 #terraform apply -auto-approve
             fi
       else
