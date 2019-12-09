@@ -24,7 +24,7 @@ steps:
       fi
 
      
-- id: Save validator result to GCS 
+- id: Save validator results to GCS 
   name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp','-r','/workspace/result.txt','gs://tfcode_vali/$BUILD_ID/result.txt']
 
