@@ -9,9 +9,10 @@ steps:
    
        chmod 755 terraform-validator-linux-amd64;
        ./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID >> /workspace/result.txt 
+        status="$?"
         #echo "$?" >> /workspace/result.txt
         #cat /workspace/result.txt
-           if [$? -ne 0];then
+           if [ $status != 0];then
               echo "Violation Found...Don't execute code for cloud resources";
             else 
                 echo "No Violation found...Apply on resources";
