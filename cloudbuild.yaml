@@ -9,11 +9,12 @@ steps:
    
        chmod 755 terraform-validator-linux-amd64;
        ./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID >> /workspace/result.txt 
+        echo "$?"
         cat /workspace/result.txt
       else
         echo " Relevant resources didn't exist......"
       fi
-      
+ /*     
 - id: Save validator result to GCS 
   name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp','-r','/workspace/result.txt','gs://tfcode_vali/$BUILD_ID/result.txt']
@@ -41,4 +42,4 @@ steps:
         echo "Result file didn't generate/exist";
       fi
 
-
+*/
