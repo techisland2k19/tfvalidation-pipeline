@@ -9,7 +9,7 @@ steps:
    
        chmod 755 terraform-validator-linux-amd64;
        ./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplan900.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID >> /workspace/result.txt 
-        echo "$?"
+        echo "$?" >> /workspace/result.txt
         cat /workspace/result.txt
       else
         echo " Relevant resources didn't exist......"
