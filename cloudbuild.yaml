@@ -15,3 +15,32 @@ steps:
         echo " Relevant resources didn't exist......"
       fi
 
+     
+- id: Save validator result to GCS 
+  name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp','-r','/workspace/result.txt','gs://tfcode_vali/$BUILD_ID/result.txt']
+
+
+- id: 'Execute for GCP Resources'
+  name: 'hashicorp/terraform:0.12.0'
+  #name: 'gcr.io/cloud-builders/docker:18.09.6'
+  #name: 'centos:latest'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+      if [ -e "/workspace/result.txt" ]; then
+           echo "$?"
+            fcount=0;
+             fcount=`grep "Constraint" /workspace/result.txt | awk '{print $1}'|sort| uniq -c|awk '{print $1}'`;
+             echo "$fcount";
+            if [ $fcount != 0 ];then
+              echo "Violation Found...Don't execute code for cloud resources";
+            else 
+                echo "No Violation found...Apply on resources";
+                #terraform apply -auto-approve
+            fi
+        else
+        echo "Result file didn't generate/exist";
+      fi
+
