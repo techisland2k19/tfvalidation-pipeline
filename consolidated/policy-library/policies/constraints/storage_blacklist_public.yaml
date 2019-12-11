@@ -24,8 +24,4 @@ spec:
   match:
     target: ["organization/*"]
     exclude: [] # optional, default is no exclusions
-  parameters: 
-    members:
-    - "allUsers"
-    - "allAuthenticatedUsers"
-#{}
+  parameters: {}
