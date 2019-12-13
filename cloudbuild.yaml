@@ -62,6 +62,7 @@ steps:
             if [ $status != 2 ];then
               echo "Security Violation Found...Don't execute code for cloud resources";
              else 
+                cd consolidated/cloudresources
                 echo "No security Violation found...Applying on resources";
                 # You must save remote state of terraform on gcs bucket as this job is containerized & will delete underlying resources from filesystem once job finished.
                 terraform apply "tfplanoutput.tfplan"
