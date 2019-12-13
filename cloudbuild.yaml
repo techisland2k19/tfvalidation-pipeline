@@ -46,7 +46,7 @@ steps:
 
 # Validate the transformed tfplan.json((terraform version0.12)) file for security violation with help of forseti library & validator binary.This binary support terraform version 0.12 code.
 
-- id: 'validate tfplan output'
+- id: 'validate tfplan output for security violation'
   name: 'hashicorp/terraform:0.12.8' #'gcr.io/cloud-builders/docker:18.09.6'
   entrypoint: 'sh'
   args: 
@@ -74,6 +74,6 @@ steps:
 
 # Copy the result violation result into bucket.
 
-- id: Save validator results to GCS 
+- id: Save violations result to GCS 
   name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp','-r','/workspace/violation-results.txt','gs://tfvalidator-res-ep01/$BUILD_ID/violation-results.txt']
