@@ -52,7 +52,7 @@ steps:
        ./terraform-validator-linux-amd64 validate consolidated/cloudresources/planinfraopv12.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID >> /workspace/violation-results.txt 
         status="$?";
         echo "Status code:$status" >> /workspace/violation-results.txt
-        cat /workspace/result.txt
+        cat /workspace/violation-results.txt
         
             if [ $status != 0 ];then
               echo "Security Violation Found...Don't execute code for cloud resources";
