@@ -65,7 +65,7 @@ steps:
                 cd consolidated/cloudresources
                 echo "No security Violation found...Applying on resources";
                 # You must save remote state of terraform on gcs bucket as this job is containerized & will delete underlying resources from filesystem once job finished.
-                terraform destroy "tfplanoutput.tfplan"
+                terraform destroy
             fi
       else
         echo " Relevant resources didn't exist...See cloud build logs...."
