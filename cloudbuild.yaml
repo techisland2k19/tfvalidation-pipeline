@@ -1,5 +1,5 @@
 steps:
-# Initialize the terraform environment for tf infra code.
+# Initialize the terraform v0.12 environment for tf infra code.
 - id: 'tf init'
   name: 'hashicorp/terraform:0.12.8'
   entrypoint: 'sh'
