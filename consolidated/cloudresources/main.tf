@@ -5,21 +5,15 @@ provider "google" {
 }
 
 
-#data "google_client_config" "default" {}
-
 resource "google_compute_network" "default" {
     name                    = "${var.name}"
-   # project                 = "${length(var.project) > 0 ? var.project : data.google_client_config.default.project}"
     auto_create_subnetworks = "${var.auto_create_subnetworks}"
     routing_mode            = "${var.routing_mode}"
 }
 
  resource "google_compute_subnetwork" "default" {
-#provider = "google-beta"
-      #count = "${length(var.subnets)}"
 
-      count         = "${var.auto_create_subnetworks == "false" ? length(var.subnetworks) : 0}"
-      
+      count         = "${var.auto_create_subnetworks == "false" ? length(var.subnetworks) : 0}" 
       name          = "${lookup(var.subnetworks[count.index], "subnetname")}" # mandatory, as name setting on region name for ease from subnetwork variable
       #project       = "${length(var.project) > 0 ? var.project : data.google_client_config.default.project}"
       ip_cidr_range = "${lookup(var.subnetworks[count.index], "cidr")}"  # mandatory, as cidr setting on region after getting from subnetwork variable
@@ -53,7 +47,7 @@ resource "google_compute_firewall" "new-firewall" {
 }
 
 resource "google_compute_instance" "vm_instance" {
-  name         = "test-ins01"
+  name         = "test-ins023"
     project = "${var.project}"
   machine_type = "f1-micro"
    zone         = "us-east1-c"
@@ -74,7 +68,7 @@ resource "google_compute_instance" "vm_instance" {
 }
 
 resource "google_compute_instance" "vm_instance08" {
-  name         = "test-ins08"
+  name         = "test-ins023"
   machine_type = "f1-micro"
 zone         = "us-east1-c"  
 project = "${var.project}"
@@ -126,7 +120,7 @@ resource "google_storage_bucket_iam_binding" "binding" {
 }
   
  resource "google_storage_bucket" "bk_validate" {
-  name     = "bkt-validator-01"
+  name     = "bkt-validator-023"
   location = "EU"
   project = "p-02-08-19-gcp-lab-admin4"
   logging {
@@ -136,12 +130,12 @@ resource "google_storage_bucket_iam_binding" "binding" {
 
 
 resource "google_sql_database" "test_db" {
-  name     = "my-database"
+  name     = "test-ep023-db"
   instance = google_sql_database_instance.test_ins.name
 }
 
 resource "google_sql_database_instance" "test_ins" {
-  name   = "t1-ins"
+  name   = "test-ep023-ins"
   region = "us-central"
   settings {
     tier = "D0"
