@@ -16,7 +16,7 @@ steps:
 
 - id: Pull a key from GCS 
   name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp','gs://secretstore-test/key.json','/']
+  args: ['cp','-r','gs://secretstore-test/key.json','/workspace/key.json']
   
 - id: 'tf plan'
   name: 'hashicorp/terraform:0.12.8'
