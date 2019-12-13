@@ -52,11 +52,11 @@ steps:
         echo "Status code:$status" >> /workspace/violation-results.txt
         cat /workspace/violation-results.txt
         
-            if [ $status != 0 ];then
+            if [ $status != 2 ];then
               echo "Security Violation Found...Don't execute code for cloud resources";
              else 
-                echo "No security Violation found...Apply on resources";
-                #terraform apply -auto-approve
+                echo "No security Violation found...Applying on resources";
+                #terraform apply "tfplanoutput.tfplan"
             fi
       else
         echo " Relevant resources didn't exist......"
