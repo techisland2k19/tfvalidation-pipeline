@@ -1,5 +1,5 @@
 steps:
-
+# Initialize the terraform environment for tf infra code.
 - id: 'tf init'
   name: 'hashicorp/terraform:0.12.8'
   entrypoint: 'sh'
@@ -14,10 +14,14 @@ steps:
           #terraform init || exit 1
       fi 
 
+#Pulling service account from secret store to let terraform plan & execute on infra code.Key will be copied into container.
+
 - id: Pull a key from GCS 
   name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp','-r','gs://secretstore-test/key.json','/workspace/key.json']
   
+#Plan & capture output 
+
 - id: 'tf plan'
   name: 'hashicorp/terraform:0.12.8'
   entrypoint: 'sh'
@@ -34,9 +38,13 @@ steps:
           #terraform plan || exit 1   
       fi 
 
+# Save the transformed tfplan.json(terraform version0.12) file into bucket for future analysis.
+
 - id: Save terraform plan json output to GCS 
   name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp','-r','/workspace/consolidated/cloudresources/tfplanoutputv12.tfplan.json','gs://tfcode_vali/$BUILD_ID/tfplanoutputv12.tfplan.json']
+  args: ['cp','-r','/workspace/consolidated/cloudresources/tfplanoutputv12.tfplan.json','gs://tfvalidator-res-ep01/$BUILD_ID/tfplanoutputv12.tfplan.json']
+
+# Validate the transformed tfplan.json((terraform version0.12)) file for security violation with help of forseti library & validator binary.This binary support terraform version 0.12 code.
 
 - id: 'validate tfplan output'
   name: 'hashicorp/terraform:0.12.8' #'gcr.io/cloud-builders/docker:18.09.6'
@@ -47,6 +55,7 @@ steps:
       if [ -d "consolidated/" ]; then
    
        chmod 755 terraform-validator-linux-amd64;
+       # terraform-validator-linux-amd64 binary downloaded from validator bucket & updated by google opensource on nov 2019
        ./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplanoutputv12.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID >> /workspace/violation-results.txt 
         status="$?";
         echo "Status code:$status" >> /workspace/violation-results.txt
@@ -56,13 +65,15 @@ steps:
               echo "Security Violation Found...Don't execute code for cloud resources";
              else 
                 echo "No security Violation found...Applying on resources";
+                # You must save remote state of terraform on gcs bucket as this job is containerized & will delete underlying resources from filesystem once job finished.
                 #terraform apply "tfplanoutput.tfplan"
             fi
       else
         echo " Relevant resources didn't exist......"
       fi
 
-     
+# Copy the result violation result into bucket.
+
 - id: Save validator results to GCS 
   name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp','-r','/workspace/violation-results.txt','gs://tfcode_vali/$BUILD_ID/violation-results.txt']
+  args: ['cp','-r','/workspace/violation-results.txt','gs://tfvalidator-res-ep01/$BUILD_ID/violation-results.txt']
