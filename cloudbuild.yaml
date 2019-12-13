@@ -27,7 +27,7 @@ steps:
       if [ -d "consolidated/" ]; then
         cd consolidated/cloudresources
         pwd
-        terraform plan -out=planinfraop.tfplan && terraform show -json planinfraop.tfplan >> /workspace/planinfraopv12.tfplan.json
+        terraform plan -out=planinfraop.tfplan && terraform show -json planinfraop.tfplan >> /workspace/consolidated/cloudresources/planinfraopv12.tfplan.json
         ls -ltr
         #terraform plan -out=planop.tfplan
         #terraform show -json planop.tfplan > planop.tfplan.json
@@ -38,7 +38,7 @@ steps:
 
 - id: Save terraform plan json output to GCS 
   name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp','-r','/workspace/tfplanoutputv12.tfplan.json','gs://tfcode_vali/$BUILD_ID/tfplanoutputv12.tfplan.json']
+  args: ['cp','-r','/workspace/consolidated/cloudresources/planinfraopv12.tfplan.json','gs://tfcode_vali/$BUILD_ID/planinfraopv12.tfplan.json']
 
 - id: 'validate tfplan output'
   name: 'hashicorp/terraform:0.12.8' #'gcr.io/cloud-builders/docker:18.09.6'
@@ -49,9 +49,9 @@ steps:
       if [ -d "consolidated/" ]; then
    
        chmod 755 terraform-validator-linux-amd64;
-       ./terraform-validator-linux-amd64 validate consolidated/cloudresources/testplanoutput.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID >> /workspace/result.txt 
+       ./terraform-validator-linux-amd64 validate consolidated/cloudresources/planinfraopv12.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID >> /workspace/violation-results.txt 
         status="$?";
-        echo "Status code:$status" >> /workspace/result.txt
+        echo "Status code:$status" >> /workspace/violation-results.txt
         cat /workspace/result.txt
         
             if [ $status != 0 ];then
@@ -67,5 +67,5 @@ steps:
      
 - id: Save validator results to GCS 
   name: 'gcr.io/cloud-builders/gsutil'
-  args: ['cp','-r','/workspace/result.txt','gs://tfcode_vali/$BUILD_ID/result.txt']
+  args: ['cp','-r','/workspace/violation-results.txt','gs://tfcode_vali/$BUILD_ID/violation-results.txt']
 
