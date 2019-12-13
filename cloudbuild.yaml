@@ -1,4 +1,40 @@
 steps:
+
+- id: 'tf init'
+  name: 'hashicorp/terraform:0.12.8'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - |
+      if [ -d "consolidated/" ]; then
+        cd consolidated/cloudresources
+        terraform init
+      else
+        echo " Relevant resources didn't exist......"
+          #terraform init || exit 1
+      fi 
+
+- id: 'tf plan'
+  name: 'hashicorp/terraform:0.12.8'
+  entrypoint: 'sh'
+  args: 
+  - '-c'
+  - | 
+      if [ -d "consolidated/" ]; then
+        cd consolidated/cloudresources
+        terraform plan -out=tfplanoutput.tfplan && terraform show -json tfplanoutput.tfplan > /workspace/tfplanoutputv12.tfplan.json
+        ls -ltr
+        #terraform plan -out=planop.tfplan
+        #terraform show -json planop.tfplan > planop.tfplan.json
+      else
+        echo "Terraform plan error......"
+          #terraform plan || exit 1   
+      fi 
+
+- id: Save terraform plan json output to GCS 
+  name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp','-r','/workspace/tfplanoutputv12.tfplan.json','gs://tfcode_vali/$BUILD_ID/tfplanoutputv12.tfplan.json']
+
 - id: 'validate tfplan output'
   name: 'hashicorp/terraform:0.12.8' #'gcr.io/cloud-builders/docker:18.09.6'
   entrypoint: 'sh'
