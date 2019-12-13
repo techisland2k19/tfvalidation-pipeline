@@ -1,5 +1,5 @@
 provider "google" {
-  credentials = "${file("/tfvalikey.json")}"
+  credentials = "${file("/key.json")}"
   project = "p-02-08-19-gcp-lab-admin4"
   zone= "us-east1-c"
 }
