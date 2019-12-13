@@ -11,7 +11,6 @@ steps:
         terraform init
       else
         echo " Relevant resources didn't exist......"
-          #terraform init || exit 1
       fi 
 
 #Pulling service account from secret store to let terraform plan & execute on infra code.Key will be copied into container.
@@ -30,12 +29,11 @@ steps:
   - | 
       if [ -d "consolidated/" ]; then
         cd consolidated/cloudresources
-        pwd
+     
         terraform plan -out=tfplanoutput.tfplan && terraform show -json tfplanoutput.tfplan >> /workspace/consolidated/cloudresources/tfplanoutputv12.tfplan.json
         ls -ltr
       else
         echo "Terraform plan error......"
-          #terraform plan || exit 1   
       fi 
 
 # Save the transformed tfplan.json(terraform version0.12) file into bucket for future analysis.
