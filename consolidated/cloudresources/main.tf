@@ -4,7 +4,7 @@ provider "google" {
   zone= "us-east1-c"
 }
 
-
+/*
 resource "google_compute_network" "default" {
     name                    = "${var.name}"
     auto_create_subnetworks = "${var.auto_create_subnetworks}"
@@ -66,7 +66,7 @@ resource "google_compute_instance" "vm_instance" {
     }
   }
 }
-/*
+
 resource "google_compute_instance" "vm_instance08" {
   name         = "test-ep0224"
   machine_type = "f1-micro"
@@ -88,7 +88,7 @@ access_config  {
   }
 }
 
-*/
+
 
 resource "google_project_iam_binding" "iam_based_roles" {
   project = "${var.project}"
@@ -119,16 +119,7 @@ resource "google_storage_bucket_iam_binding" "binding" {
     "allAuthenticatedUsers",
   ]
 }
-  
- resource "google_storage_bucket" "bk_validate" {
-  name     = "bkt-validator-023"
-  location = "EU"
-  project = "p-02-08-19-gcp-lab-admin4"
-  logging {
-  log_bucket = "b01-us-p-02-08-19-gcp-lab-admin4-vli08"
-        }
-}
-
+ 
 
 resource "google_sql_database" "test_db" {
   name     = "test-ep0234-db"
@@ -141,4 +132,14 @@ resource "google_sql_database_instance" "test_ins" {
   settings {
     tier = "D0"
   }
+}
+*/
+    
+ resource "google_storage_bucket" "bk_validate" {
+  name     = "bkt-validator-023"
+  location = "EU"
+  project = "p-02-08-19-gcp-lab-admin4"
+  logging {
+  log_bucket = "b01-us-p-02-08-19-gcp-lab-admin4-vli08"
+        }
 }
