@@ -1,6 +1,6 @@
 steps:
 - id: 'validate tfplan output'
-  name: 'gcr.io/cloud-builders/docker:18.09.6'
+  name: 'hashicorp/terraform:0.12' #'gcr.io/cloud-builders/docker:18.09.6'
   entrypoint: 'sh'
   args: 
   - '-c'
