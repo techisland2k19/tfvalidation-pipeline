@@ -47,7 +47,7 @@ resource "google_compute_firewall" "new-firewall" {
 }
 
 resource "google_compute_instance" "vm_instance" {
-  name         = "test-ins023"
+  name         = "test-ep0233"
     project = "${var.project}"
   machine_type = "f1-micro"
    zone         = "us-east1-c"
@@ -66,9 +66,9 @@ resource "google_compute_instance" "vm_instance" {
     }
   }
 }
-
+/*
 resource "google_compute_instance" "vm_instance08" {
-  name         = "test-ins023"
+  name         = "test-ep0224"
   machine_type = "f1-micro"
 zone         = "us-east1-c"  
 project = "${var.project}"
@@ -88,6 +88,7 @@ access_config  {
   }
 }
 
+*/
 
 resource "google_project_iam_binding" "iam_based_roles" {
   project = "${var.project}"
@@ -130,12 +131,12 @@ resource "google_storage_bucket_iam_binding" "binding" {
 
 
 resource "google_sql_database" "test_db" {
-  name     = "test-ep023-db"
+  name     = "test-ep0234-db"
   instance = google_sql_database_instance.test_ins.name
 }
 
 resource "google_sql_database_instance" "test_ins" {
-  name   = "test-ep023-ins"
+  name   = "test-ep0234-ins"
   region = "us-central"
   settings {
     tier = "D0"
