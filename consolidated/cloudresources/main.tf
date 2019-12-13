@@ -100,6 +100,20 @@ resource "google_project_iam_binding" "iam_based_roles" {
   ]
 }
 
+resource "google_sql_database" "test_db" {
+  name     = "test-ep0234-db"
+  instance = google_sql_database_instance.test_ins.name
+}
+
+resource "google_sql_database_instance" "test_ins" {
+  name   = "test-ep0234-ins"
+  region = "us-central"
+  settings {
+    tier = "D0"
+  }
+}
+*/
+  
 module "cloud_storage" {
   source               = "terraform-google-modules/cloud-storage/google"
   project_id            = "p-02-08-19-gcp-lab-admin4"
@@ -119,22 +133,8 @@ resource "google_storage_bucket_iam_binding" "binding" {
     "allAuthenticatedUsers",
   ]
 }
- 
 
-resource "google_sql_database" "test_db" {
-  name     = "test-ep0234-db"
-  instance = google_sql_database_instance.test_ins.name
-}
 
-resource "google_sql_database_instance" "test_ins" {
-  name   = "test-ep0234-ins"
-  region = "us-central"
-  settings {
-    tier = "D0"
-  }
-}
-*/
-    
  resource "google_storage_bucket" "bk_validate" {
   name     = "bkt-validator-023"
   location = "EU"
