@@ -44,7 +44,7 @@ steps:
 
 # Validate the transformed tfplan.json((terraform version0.12)) file for security violation with help of forseti library & validator binary.This binary support terraform version 0.12 code.
 
-- id: 'validate tfplan output for security violation'
+- id: 'validate tfplan output for security violation & executing resources if no violation'
   name: 'hashicorp/terraform:0.12.8' #'gcr.io/cloud-builders/docker:18.09.6'
   entrypoint: 'sh'
   args: 
@@ -59,13 +59,14 @@ steps:
         echo "Status code:$status" >> /workspace/violation-results.txt
         cat /workspace/violation-results.txt
         
-            if [ $status != 2 ];then
+            if [ $status != 0 ];then
               echo "Security Violation Found...Don't execute code for cloud resources";
              else 
                 cd consolidated/cloudresources
                 echo "No security Violation found...Applying on resources";
                 # You must save remote state of terraform on gcs bucket as this job is containerized & will delete underlying resources from filesystem once job finished.
-                terraform destroy -auto-approve  #"tfplanoutput.tfplan"
+                #terraform apply "tfplanoutput.tfplan"
+                #terraform destroy -auto-approve  # can't use "tfplanoutput.tfplan" in destory.will get info from remote state at gcs
             fi
       else
         echo " Relevant resources didn't exist...See cloud build logs...."
