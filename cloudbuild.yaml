@@ -10,7 +10,7 @@ steps:
         cd consolidated/cloudresources
         terraform init
       else
-        echo " Relevant resources didn't exist......"
+        echo " tf initialization encountered problem..See cloud build logs......"
       fi 
 
 #Pulling service account from secret store to let terraform plan & execute on infra code.Key will be copied into container.
@@ -33,7 +33,7 @@ steps:
         terraform plan -out=tfplanoutput.tfplan && terraform show -json tfplanoutput.tfplan >> /workspace/consolidated/cloudresources/tfplanoutputv12.tfplan.json
         ls -ltr
       else
-        echo "Terraform plan error......"
+        echo "Terraform plan error...See cloud build logs...."
       fi 
 
 # Save the transformed tfplan.json(terraform version0.12) file into bucket for future analysis.
@@ -67,7 +67,7 @@ steps:
                 #terraform apply "tfplanoutput.tfplan"
             fi
       else
-        echo " Relevant resources didn't exist......"
+        echo " Relevant resources didn't exist...See cloud build logs...."
       fi
 
 # Copy the result violation result into bucket.
