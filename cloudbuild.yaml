@@ -26,7 +26,7 @@ steps:
   - | 
       if [ -d "consolidated/" ]; then
         cd consolidated/cloudresources
-        terraform plan -out=tfplanoutput.tfplan && terraform show -json tfplanoutput.tfplan > /workspace/tfplanoutputv12.tfplan.json
+        terraform plan -out=tfplanoutput.tfplan && terraform show -json tfplanoutput.tfplan >> /workspace/tfplanoutputv12.tfplan.json
         ls -ltr
         #terraform plan -out=planop.tfplan
         #terraform show -json planop.tfplan > planop.tfplan.json
