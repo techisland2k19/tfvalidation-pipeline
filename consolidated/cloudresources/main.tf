@@ -124,3 +124,26 @@ resource "google_storage_bucket_iam_binding" "binding" {
     "allAuthenticatedUsers",
   ]
 }
+  
+ resource "google_storage_bucket" "bk_validate" {
+  name     = "bkt-validator-01"
+  location = "EU"
+  project = "p-02-08-19-gcp-lab-admin4"
+  logging {
+  log_bucket = "b01-us-p-02-08-19-gcp-lab-admin4-vli08"
+        }
+}
+
+
+resource "google_sql_database" "test_db" {
+  name     = "my-database"
+  instance = google_sql_database_instance.test_ins.name
+}
+
+resource "google_sql_database_instance" "test_ins" {
+  name   = "t1-ins"
+  region = "us-central"
+  settings {
+    tier = "D0"
+  }
+}
