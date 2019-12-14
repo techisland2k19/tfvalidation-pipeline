@@ -1,4 +1,4 @@
-/*
+
 output "vpc_name" {
   value       = "${google_compute_network.default.name}"
   description = "Name of the created VPC."
@@ -21,7 +21,7 @@ output "firewal_self_link" {
   description = "The URI of the created resource"
   value       = "${google_compute_firewall.new-firewall.name}"
 }
-*/
+
 output "Bucket_name" {
   description = "Bucket names."
   value       = module.cloud_storage.names
