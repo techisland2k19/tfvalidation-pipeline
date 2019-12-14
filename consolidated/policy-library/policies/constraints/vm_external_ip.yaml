@@ -29,4 +29,4 @@ spec:
       # regex example:
       #- //compute.googleapis.com/projects/p-02-08-19-gcp-lab-admin4/.*
       # exact match example:
-      - //compute.googleapis.com/projects/p-02-08-19-gcp-lab-admin4/zones/us-east1-c/instances/test-ins01
+      - //compute.googleapis.com/projects/p-02-08-19-gcp-lab-admin4/zones/us-east1-c/instances/test-ep0233
