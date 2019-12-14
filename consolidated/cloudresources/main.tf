@@ -4,7 +4,7 @@ provider "google" {
   zone= "us-east1-c"
 }
 
-/*
+
 resource "google_compute_network" "default" {
     name                    = "${var.name}"
     auto_create_subnetworks = "${var.auto_create_subnetworks}"
@@ -112,7 +112,7 @@ resource "google_sql_database_instance" "test_ins" {
     tier = "D0"
   }
 }
-*/
+
   
 module "cloud_storage" {
   source               = "terraform-google-modules/cloud-storage/google"
