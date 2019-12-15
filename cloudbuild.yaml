@@ -15,7 +15,7 @@ steps:
 
 #Pulling service account from secret store to let terraform plan & execute on infra code.Key will be copied into container.
 
-- id: Pull a key from GCS 
+- id: Pull a key from GCS & copy temporarily on workspace
   name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp','-r','gs://secretstore-test/key.json','/workspace/key.json']
   
@@ -42,6 +42,10 @@ steps:
   name: 'gcr.io/cloud-builders/gsutil'
   args: ['cp','-r','/workspace/consolidated/cloudresources/tfplanoutputv12.tfplan.json','gs://tfvalidator-res-ep01/$BUILD_ID/tfplanoutputv12.tfplan.json']
 
+- id: Pull a terraform validator tool from GCS & copy temporarily on workspace
+  name: 'gcr.io/cloud-builders/gsutil'
+  args: ['cp','-r','gs://terraform-validator/releases/2019-11-07/terraform-validator-linux-amd64','/workspace/terraform-validator-linux-amd64']  
+  
 # Validate the transformed tfplan.json((terraform version0.12)) file for security violation with help of forseti library & validator binary.This binary support terraform version 0.12 code.
 
 - id: 'validate tfplan output for security violation & executing resources if no violation'
@@ -51,7 +55,8 @@ steps:
   - '-c'
   - |
       if [ -d "consolidated/" ]; then
-   
+          pwd;
+          ls -ltr
        chmod 755 terraform-validator-linux-amd64;
        # terraform-validator-linux-amd64 binary downloaded from validator bucket & updated by google opensource on nov 2019
        ./terraform-validator-linux-amd64 validate consolidated/cloudresources/tfplanoutputv12.tfplan.json --policy-path=consolidated/policy-library/ --project=$PROJECT_ID >> /workspace/violation-results.txt 
